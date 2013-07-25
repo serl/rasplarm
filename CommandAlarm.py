@@ -21,7 +21,7 @@ class CommandAlarm(Alarm):
     args = command + [event]
     print args
     try:
-      self.proc = subprocess.Popen(args, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+      self.proc = subprocess.Popen(args, stdin = subprocess.PIPE, stdout=open('/dev/null', 'w'), stderr=subprocess.STDOUT)
     except Exception:
       self.kill()
 
