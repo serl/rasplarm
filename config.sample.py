@@ -5,15 +5,14 @@ config = {
       "password": "...",
       "terms": ['wake']
     },
-    "AlwaysCalendar": {}
+    #"AlwaysCalendar": {} testing purposes
   },
   "Alarms": {
-    "ConsoleAlarm": {},
+    #"ConsoleAlarm": {}, testing purposes
     "Mp3Alarm": {
       "command": "mpg321",
       "arguments": "-g 100",
-      "directory": "path/to/dir", #this line has precedence
-      "file": "path/to/file"
+      "directory": "path/to/dir" # I will choose one random file in the directory
     }
   }
 }
