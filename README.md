@@ -33,3 +33,8 @@ Know bugs
 
 * Actually, I need something really really easy to send SIGUSR1. I'll think something when I need it: tomorrow morning.
 * Not so good english.
+
+Obvious stuff
+=============
+
+No one is responsible if you use this crap and it didn't work
