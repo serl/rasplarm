@@ -1,5 +1,12 @@
-gdata = {
-  "username": "...",
-  "password": "..."
+config = {
+  "Calendars": {
+    "GoogleCalendar": {
+      "username": "...",
+      "password": "...",
+      "terms": ['wake']
+    }
+  },
+  "Alarms": {
+    "ConsoleAlarm": {}
+  }
 }
-terms = ['wake']
