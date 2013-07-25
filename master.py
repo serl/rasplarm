@@ -1,4 +1,5 @@
 from config import config
+import signal
 
 def create_class(name):
   mod = __import__(name)
@@ -33,11 +34,31 @@ class Master:
 
     if len(events_to_fire):
       events_to_fire.sort()
-      for k, alarm in self.alarms.items():
-        alarm.ring(events_to_fire[0])
+      self.ring_start(events_to_fire[0])
+
+  def ring_start(self, event):
+    for k, alarm in self.alarms.items():
+      if not alarm.ringing():
+        alarm.ring(event)
+
+  def ring_stop(self):
+    for k, alarm in self.alarms.items():
+      alarm.kill()
+
+  def ring_snooze(self):
+    self.ring_stop()
+    signal.signal(signal.SIGALRM, self.sigalarm_handler)
+    signal.alarm(config['snooze_minutes']*60)
+
+  def sigalarm_handler(self, signum, frame):
+    self.ring_start("snooze")
 
 if __name__ == "__main__":
+  from time import sleep
   m = Master()
   m.check()
+  sleep(2)
   m.check()
+  sleep(2)
   m.check()
+  sleep(1)
