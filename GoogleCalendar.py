@@ -19,7 +19,7 @@ class GoogleCalendar(Calendar):
     for t in self.config['terms']:
       events += self.FullTextQuery(t)
     events.sort()
-    return events[1] if len(events) else None
+    return events[0] if len(events) else None
 
   def FullTextQuery(self, text_query):
     #print 'Full text query for events on Primary Calendar: \'%s\'' % ( text_query,)
