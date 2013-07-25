@@ -9,6 +9,9 @@ config = {
   },
   "Alarms": {
     #"ConsoleAlarm": {}, testing purposes
+    "CommandAlarm": {
+      "command": "echo 'an alarm' #" # i'll call command 'event name', so if not interested, end command with #
+    },
     "Mp3Alarm": {
       "command": "mpg321",
       "arguments": "-g 100",
