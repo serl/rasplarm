@@ -37,4 +37,4 @@ Know bugs
 Obvious stuff
 =============
 
-No one is responsible if you use this crap and it didn't work
+No one is responsible if you use this crap and it doesn't work
