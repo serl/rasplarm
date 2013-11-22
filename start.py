@@ -1,3 +1,6 @@
+import logging
+logging.basicConfig()
+
 from apscheduler.scheduler import Scheduler
 from master import Master
 import signal
