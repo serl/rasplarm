@@ -1,10 +1,10 @@
 from interfaces import Alarm
 import subprocess, shlex, atexit
 
-class CommandAlarm(Alarm):
+class Command(Alarm):
 
-  def __init__(self):
-    Alarm.__init__(self)
+  def __init__(self, config):
+    Alarm.__init__(self, config)
     base = self.config['command'].split()[0]
     if subprocess.call("which " + base + " >/dev/null", shell=True) != 0:
       raise Exception("install '%s' first" % (base))
@@ -36,6 +36,6 @@ class CommandAlarm(Alarm):
 
 if __name__ == "__main__":
   from time import sleep
-  a = CommandAlarm()
+  a = Command()
   a.ring("event")
   sleep(60)

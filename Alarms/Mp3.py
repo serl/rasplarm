@@ -1,10 +1,10 @@
-from CommandAlarm import CommandAlarm
+from Command import Command
 import random, os, os.path, shlex
 
-class Mp3Alarm(CommandAlarm):
+class Mp3(Command):
 
-  def __init__(self):
-    CommandAlarm.__init__(self)
+  def __init__(self, config):
+    Command.__init__(self, config)
     if self.config.has_key('directory') and not os.path.isdir(self.config['directory']):
       raise Exception("directory '%s' does not exists" % (self.config['directory'],))
     if self.config.has_key('directory') and not os.listdir(self.config['directory']):
@@ -17,6 +17,6 @@ class Mp3Alarm(CommandAlarm):
 
 if __name__ == "__main__":
   from time import sleep
-  a = Mp3Alarm()
+  a = Mp3()
   a.ring("event")
   sleep(60)

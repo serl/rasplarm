@@ -4,10 +4,10 @@ from interfaces import Calendar
 from gdata.calendar.service import CalendarService, CalendarEventQuery
 from time import strptime, gmtime, strftime
 
-class GoogleCalendar(Calendar):
+class Google(Calendar):
 
-  def __init__(self):
-    Calendar.__init__(self)
+  def __init__(self, config):
+    Calendar.__init__(self, config)
     self.calendar_service = CalendarService()
     self.calendar_service.email = self.config['username']
     self.calendar_service.password = self.config['password']
@@ -51,5 +51,5 @@ class GoogleCalendar(Calendar):
     return events
 
 if __name__ == "__main__":
-  cal = GoogleCalendar()
+  cal = Google()
   print cal.check()

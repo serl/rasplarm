@@ -1,6 +1,6 @@
 from interfaces import Alarm
 
-class ConsoleAlarm(Alarm):
+class Console(Alarm):
 
   def ring(self, event):
     print event

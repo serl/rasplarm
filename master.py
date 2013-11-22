@@ -1,23 +1,29 @@
 from config import config
 import signal
 
-def create_class(name):
-  mod = __import__(name)
-  cls = getattr(mod, name)
-  return cls()
+def create_class(mod_name, cls_name, config):
+  mod = __import__(mod_name + "." + cls_name)
+  submod = getattr(mod, cls_name)
+  cls = getattr(submod, cls_name)
+  return cls(config)
 
 class Master:
 
   def __init__(self):
     self.calendars = {}
-    for k in config["Calendars"].keys():
-      self.calendars[k] = create_class(k)
+    self.alarms = {}
+
+    for t in ["Calendars", "Alarms"]:
+      for k in config[t].keys():
+        conf = config[t][k]
+        instance = create_class(t, conf['type'], conf)
+        if t is "Calendars":
+          self.calendars[k] = instance
+        elif t is "Alarms":
+          self.alarms[k] = instance
+
     if not len(self.calendars):
       print "Warning: No calendars configured"
-
-    self.alarms = {}
-    for k in config["Alarms"].keys():
-      self.alarms[k] = create_class(k)
     if not len(self.alarms):
       print "Warning: No alarms configured"
 
