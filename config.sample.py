@@ -24,7 +24,8 @@ config = {
     {
       "type": "Mp3",
       "command": "mplayer -quiet", # an alternative: "mpg321 -g 100",
-      "directory": "path/to/dir" # I will choose in the directory one random file to play
+      "directory": "path/to/dir", # I will choose in the directory (and subdirectories) some random files to play
+      "count": 5 # how many files? default 1
     }
   )
 }
