@@ -49,7 +49,3 @@ class Google(Calendar):
         if comparison:
           events.append("%s//%s" % (event_time_formatted, an_event.title.text))
     return events
-
-if __name__ == "__main__":
-  cal = Google()
-  print cal.check()

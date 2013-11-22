@@ -33,9 +33,3 @@ class Command(Alarm):
   def kill(self):
     if self.proc is not None:
       self.proc.kill()
-
-if __name__ == "__main__":
-  from time import sleep
-  a = Command()
-  a.ring("event")
-  sleep(60)

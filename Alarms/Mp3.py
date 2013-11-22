@@ -14,9 +14,3 @@ class Mp3(Command):
     command = shlex.split(self.config['command'])
     command += [os.path.join(self.config['directory'], random.choice(os.listdir(self.config['directory'])))]
     return command
-
-if __name__ == "__main__":
-  from time import sleep
-  a = Mp3()
-  a.ring("event")
-  sleep(60)
