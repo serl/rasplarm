@@ -5,8 +5,11 @@ class Alarm:
     "construct using config options"
     self.config = config
 
+  def start(self, event):
+    return self.ringing() or self.ring(event)
+
   def ring(self, event):
-    "run when event occurs"
+    "run when event occurs. returns boolean: True stops the chain, while False make the next alarm to be called"
     raise NotImplementedError("Should have implemented this")
 
   def ringing(self):

@@ -10,17 +10,16 @@ def create_class(mod_name, cls_name, config):
 class Master:
 
   def __init__(self):
-    self.calendars = {}
-    self.alarms = {}
+    self.calendars = []
+    self.alarms = []
 
     for t in ["Calendars", "Alarms"]:
-      for k in config[t].keys():
-        conf = config[t][k]
+      for conf in config[t]:
         instance = create_class(t, conf['type'], conf)
         if t is "Calendars":
-          self.calendars[k] = instance
+          self.calendars.append(instance)
         elif t is "Alarms":
-          self.alarms[k] = instance
+          self.alarms.append(instance)
 
     if not len(self.calendars):
       print "Warning: No calendars configured"
@@ -32,7 +31,7 @@ class Master:
 
   def check(self):
     events_to_fire = []
-    for k, cal in self.calendars.items():
+    for k, cal in enumerate(self.calendars):
       current_event = cal.check()
       past_event = self.past_event[k] if self.past_event.has_key(k) else None
       if current_event != None and current_event != past_event:
@@ -44,14 +43,14 @@ class Master:
       self.ring_start(events_to_fire[0])
 
   def ring_start(self, event):
-    for k, alarm in self.alarms.items():
-      if not alarm.ringing():
-        self.latest_event = event
-        alarm.ring(event)
+    self.latest_event = event
+    for alarm in self.alarms:
+      if alarm.start(event):
+        break
 
   def ring_stop(self):
     signal.alarm(0) #disables snooze
-    for k, alarm in self.alarms.items():
+    for alarm in self.alarms:
       alarm.kill()
 
   def ring_snooze(self):

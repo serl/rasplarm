@@ -1,5 +1,6 @@
 from interfaces import Alarm
 import subprocess, shlex, atexit
+from time import sleep
 
 class Command(Alarm):
 
@@ -9,6 +10,8 @@ class Command(Alarm):
     if subprocess.call("which " + base + " >/dev/null", shell=True) != 0:
       raise Exception("install '%s' first" % (base))
     self.proc = None
+    if not self.config.has_key('timeout'):
+      self.config['timeout'] = None
     atexit.register(self.kill)
 
   def command(self):
@@ -19,11 +22,15 @@ class Command(Alarm):
     if isinstance(command, basestring):
       command = shlex.split(self.command())
     args = command + [event]
-    print args
+    #print args
     try:
-      self.proc = subprocess.Popen(args, stdin = subprocess.PIPE, stdout=open('/dev/null', 'w'), stderr=subprocess.STDOUT)
+      self.proc = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=open('/dev/null', 'w'), stderr=subprocess.STDOUT)
+      if self.config['timeout'] > 0:
+        sleep(self.config['timeout'])
+        return self.proc.poll() is None
     except Exception:
       self.kill()
+    return False
 
   def ringing(self):
     if self.proc is None:
@@ -31,5 +38,7 @@ class Command(Alarm):
     return self.proc.poll() is None
 
   def kill(self):
-    if self.proc is not None:
+    try:
       self.proc.kill()
+    except:
+      pass
