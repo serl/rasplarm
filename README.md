@@ -31,8 +31,8 @@ Then, there are some interesting signals (assuming $pid is the PID):
 Know bugs
 =========
 
-* Actually, I need something really really easy to send SIGUSR1. I'll think something when I need it: tomorrow morning.
-* Not so good english.
+* Actually, I need something really really easy to send SIGUSR1. I'll think something about it... tomorrow morning.
+* Not so good English.
 
 Obvious stuff
 =============

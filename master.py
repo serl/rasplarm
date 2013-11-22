@@ -50,7 +50,7 @@ class Master:
         alarm.ring(event)
 
   def ring_stop(self):
-    signal.alarm(0) #disable snooze
+    signal.alarm(0) #disables snooze
     for k, alarm in self.alarms.items():
       alarm.kill()
 
