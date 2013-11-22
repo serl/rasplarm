@@ -28,6 +28,7 @@ class Master:
       print "Warning: No alarms configured"
 
     self.past_event = {}
+    self.latest_event = ""
 
   def check(self):
     events_to_fire = []
@@ -45,9 +46,11 @@ class Master:
   def ring_start(self, event):
     for k, alarm in self.alarms.items():
       if not alarm.ringing():
+        self.latest_event = event
         alarm.ring(event)
 
   def ring_stop(self):
+    signal.alarm(0) #disable snooze
     for k, alarm in self.alarms.items():
       alarm.kill()
 
@@ -57,7 +60,7 @@ class Master:
     signal.alarm(config['snooze_minutes']*60)
 
   def sigalarm_handler(self, signum, frame):
-    self.ring_start("snooze")
+    self.ring_start(self.latest_event)
 
 if __name__ == "__main__":
   from time import sleep
