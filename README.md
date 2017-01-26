@@ -28,13 +28,22 @@ Then, there are some interesting signals (assuming $pid is the PID):
     kill -SIGUSR1 $pid #snooze the alarm, it'll restart after config['snooze_minutes'] minutes
     kill -SIGUSR2 $pid #stop completely the alarm
 
-Know bugs
+Known bugs
 =========
 
 * Actually, I need something really really easy to send SIGUSR1. I'll think something about it... tomorrow morning.
-* Not so good English.
+
+TODOs
+=====
+
+* see if everything still works (never used it seriously)
+* clock adjusting
+* something to reopen the thing if it crashes in the middle of the night...
+* continuous play on Mp3Alarm
+* https://code.google.com/p/raspberry-gpio-python/wiki/Inputs and outputs
 
 Obvious stuff
 =============
 
 No one is responsible if you use this crap and it doesn't work
+
